@@ -6,12 +6,17 @@ def main(args):
     print(f'Started job on TACC with id {args.job_id}')
 
     print('CUDA available:', torch.cuda.is_available())
-    print('CUDA device count:', torch.cuda.device_count())
-    print('CUDA device name:', torch.cuda.get_device_name(0))
-    print('CUDA current device:', torch.cuda.current_device())
 
-    mat1 = torch.randn(3, 3).reshape(3, 3).cuda()
-    mat2 = torch.randn(3, 4).reshape(3, 4).cuda()
+    if torch.cuda.is_available():
+        print('CUDA device count:', torch.cuda.device_count())
+        print('CUDA device name:', torch.cuda.get_device_name(0))
+        print('CUDA current device:', torch.cuda.current_device())
+        device = f'cuda:{torch.cuda.current_device()}'
+    else:
+        device = "cpu"
+    
+    mat1 = torch.randn(3, 3).reshape(3, 3).to(device)
+    mat2 = torch.randn(3, 4).reshape(3, 4).to(device)
     print("mat1:", mat1)
     print("mat2:", mat2)
     print("mat1 @ mat2", mat1 @ mat2)

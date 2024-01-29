@@ -24,21 +24,21 @@
 #SBATCH -o launcher.o%j             # output and error file name (%j expands to SLURM jobID)
 #SBATCH -N 2                        # number of nodes requested
 #SBATCH -n 32                       # total number of tasks to run in parallel
-#SBATCH -p development              # queue (partition) 
-#SBATCH -t 00:01:00                 # run time (hh:mm:ss) 
-#SBATCH -A IRI23004                 # Allocation name to charge job against
+#SBATCH -p gpu-a100                 # queue (partition) 
+#SBATCH -t 00:15:00                 # run time (hh:mm:ss) 
+#SBATCH -A YOUR_ALLOCATION          # Allocation name to charge job against
 
 module load python3
-module load cuda
+module load cuda/12.0
 module load tacc-apptainer
 
 # Launcher not compatible with MPU containers, launch with task_affinity
 
 # 128 tasks; offset by  0 entries in hostfile.
-ibrun -n 16 -o  0 task_affinity singularity exec --nv tacc-tutorial.sif python test_mpu.py --job_id 0 &   
+ibrun -n 16 -o  0 task_affinity singularity exec --nv tacc-tutorial.sif python test_mpi.py --job_id 0 > output/job0.txt &   
 
 # 128 tasks; offset by 16 entries in hostfile.
-ibrun -n 16 -o 16 task_affinity singularity exec --nv tacc-tutorial.sif python test_mpu.py --job_id 1 & 
+ibrun -n 16 -o 16 task_affinity singularity exec --nv tacc-tutorial.sif python test_mpi.py --job_id 1 >  output/job1.txt & 
 
 # Required; else script will exit immediately.
 wait
