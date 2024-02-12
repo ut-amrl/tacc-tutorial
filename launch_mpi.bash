@@ -32,7 +32,7 @@ module load python3
 module load cuda/12.0
 module load tacc-apptainer
 
-# Launcher not compatible with MPU containers, launch with task_affinity
+# Launcher not compatible with MPI containers, launch with task_affinity
 
 # 128 tasks; offset by  0 entries in hostfile.
 ibrun -n 16 -o  0 task_affinity singularity exec --nv tacc-tutorial.sif python test_mpi.py --job_id 0 > output/job0.txt &   

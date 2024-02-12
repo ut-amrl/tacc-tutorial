@@ -16,15 +16,8 @@ ENV TZ=US \
 # Minimal setup
 RUN apt-get update \
  && apt-get install -y locales lsb-release
+ARG DEBIAN_FRONTEND=noninteractive
 RUN dpkg-reconfigure locales
-
-# Avoid Public GPG key error
-# https://github.com/NVIDIA/nvidia-docker/issues/1631
-# RUN rm /etc/apt/sources.list.d/cuda.list \
-#     && rm /etc/apt/sources.list.d/nvidia-ml.list \
-#     && apt-key del 7fa2af80 \
-#     && apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/3bf863cc.pub \
-#     && apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu2004/x86_64/7fa2af80.pub
 
 # Install the required packages
 RUN apt-get update && apt-get -y upgrade 
@@ -32,16 +25,16 @@ RUN apt-get install -y ffmpeg libsm6 libxext6 git vim ninja-build libglib2.0-0 l
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# # Install ROS Noetic
-# RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-# RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
-# RUN apt-get update \
-#  && apt-get install -y --no-install-recommends ros-noetic-desktop-full
-# RUN apt-get install -y --no-install-recommends python3-rosdep
-# RUN rosdep init \
-#  && rosdep fix-permissions \
-#  && rosdep update
-# RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+# Install ROS Noetic
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ros-noetic-desktop-full
+RUN apt-get install -y --no-install-recommends python3-rosdep
+RUN rosdep init \
+ && rosdep fix-permissions \
+ && rosdep update
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
 COPY . /tacc-tutorial
 WORKDIR /tacc-tutorial
