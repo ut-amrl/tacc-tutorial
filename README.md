@@ -39,7 +39,7 @@ cd tacc-tutorial
 To build the Docker image locally, and run the following command from the root of the repository. Replace `<username>` with your Docker Hub username.
 
 ```bash
-docker build -t <username>/tacc-tutorial Dockerfile .
+docker build -t <username>/tacc-tutorial .
 ```
 
 ### Running the Docker image locally
@@ -82,12 +82,12 @@ docker push <username>/tacc-tutorial
 
 ### Setting up Singularity on Lonestar6
 
-Next, you will need to build the image on Lonestar6. To do so, log in to Lonestar6 and run the following commands. 
+Next, you will need to build the image on Lonestar6. To do so, log in to Lonestar6 and run the following commands. You will need to replace `<allocationname>` and `<username>` with your allocation and TACC username respectively.
 
 ```bash
 cd $SCRATCH
 git clone git@github.com:ut-amrl/tacc-tutorial.git
-idev -m 30 -p gpu-a100-small
+idev -m 30 -p gpu-a100-small -A <allocationname>
 module load tacc-apptainer
 singularity build tacc-tutorial.sif docker://<username>/tacc-tutorial
 ```
