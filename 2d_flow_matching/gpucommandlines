@@ -1,0 +1,3 @@
+singularity exec --nv tacc-tutorial-flow.sif python3 -u /home/tacc-tutorial/2d_flow_matching/train.py --lr 1.0
+singularity exec --nv tacc-tutorial-flow.sif python3 -u /home/tacc-tutorial/2d_flow_matching/train.py --lr 0.01
+singularity exec --nv tacc-tutorial-flow.sif python3 -u /home/tacc-tutorial/2d_flow_matching/train.py --lr 0.001
