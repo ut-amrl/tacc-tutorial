@@ -16,10 +16,5 @@ RUN python3 -m pip install --upgrade pip
 # Install only the necessary Python packages (torch is pre-installed)
 RUN pip3 install matplotlib numpy flow_matching
 
-# Clone and install the flow_matching repository in editable mode.
-# Replace the URL with the correct repository if needed.
-# RUN git clone https://github.com/yourusername/flow_matching.git && \
-#     pip3 install -e flow_matching
-
 # The container expects that train.py and other files will be mounted as a volume.
 CMD ["python3", "/home/tacc-tutorial/2d_flow_matching/train.py", "--help"]

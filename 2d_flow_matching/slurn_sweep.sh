@@ -10,7 +10,7 @@
 # Notes:
 #
 #  -- Copy/edit this script as desired.  Launch by executing
-#     "sbatch launch_sweep.sh"
+#     "sbatch slurn_sweep.sh"
 #
 #  -- Executes a parametric sweep over the number of hyperparameters.
 #
@@ -20,17 +20,18 @@
 #----------------------------------------------------
 
 #!/bin/bash
-#SBATCH -p gpu-a100-small           # queue (partition) 
+#SBATCH -p gpu-a100                 # queue (partition) 
 #SBATCH -J flow-matching-sweep      # job name
 #SBATCH -o pylauncher.o%j           # output file name (%j expands to SLURM jobID)
 #SBATCH -e pylaunchertest.o%j       # error file name (%j expands to SLURM jobID)
-#SBATCH –ntasks-per-node 3          # needs to match #gpus on each node
+#SBATCH -n 3          # needs to match #gpus on each node
 #SBATCH -N 1                        # number of nodes requested
 #SBATCH -t 00:15:00                 # run time (hh:mm:ss) 
-#SBATCH -A YOUR_ALLOCATION          # Allocation name to charge job against
+#SBATCH -A MLL                      # Allocation name to charge job against
 
+module load pylauncher
 module load python3
-module load cuda/12.1
+module load cuda/12.2
 module load tacc-apptainer
 
 python3 launcher.py
