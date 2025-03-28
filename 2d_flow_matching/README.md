@@ -52,10 +52,11 @@ export DOCKER_USER=artzha
 ssh arthurz@ls6.tacc.utexas.edu
 ```
 
-2. Clone this repository to the `$SCRATCH` directory. This environment variable is automatically set when you ssh into TACC.
+2. Clone this repository to the `$SCRATCH` directory. This environment variable is automatically set when you ssh into TACC. Then login to an interactive compute node.
 ```bash
 cd $SCRATCH
 git clone git@github.com:ut-amrl/tacc-tutorial.git
+idev -m 30 -p vm-small
 ```
 
 3. Pull and build the singularity sif image. You will need to set the `DOCKER_USER` environment variable to match your docker account that you pushed the container to in step 5 of the local installation step for the script below to work properly. Alternatively, you may also use the default container by copying and pasting the commands below. This will take a few minutes. 
