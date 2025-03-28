@@ -1,3 +1,3 @@
-apptainer exec --nv tacc-tutorial-flow_latest.sif python3 -u $SCRATCH/tacc-tutorial/2d_flow_matching/train.py --lr 0.1
-apptainer exec --nv tacc-tutorial-flow_latest.sif python3 -u $SCRATCH/tacc-tutorial/2d_flow_matching/train.py --lr 0.01
-apptainer exec --nv tacc-tutorial-flow_latest.sif python3 -u $SCRATCH/tacc-tutorial/2d_flow_matching/train.py --lr 0.001
+apptainer exec --nv 2d-flow-matching_latest.sif python3 -u $SCRATCH/tacc-tutorial/2d_flow_matching/train.py --lr 0.1
+apptainer exec --nv 2d-flow-matching_latest.sif python3 -u $SCRATCH/tacc-tutorial/2d_flow_matching/train.py --lr 0.01
+apptainer exec --nv 2d-flow-matching_latest.sif python3 -u $SCRATCH/tacc-tutorial/2d_flow_matching/train.py --lr 0.001

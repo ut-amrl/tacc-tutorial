@@ -25,7 +25,7 @@ git clone git@github.com:ut-amrl/tacc-tutorial.git
 2. Build the container for the flow matching tutorial. This should take a few minutes at most.
 ```bash
 cd $HOME/tacc-tutorial/2d_flow_matching
-docker build -t tacc-tutorial-flow .
+docker build -t 2d_flow_matching .
 ```
 
 3. If you would like to test the container locally first, you can run the following command. It should take a few minutes to finish converging.

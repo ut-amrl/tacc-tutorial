@@ -1,2 +1,3 @@
 #!/bin/bash
-apptainer pull docker://$DOCKER_USER/tacc-tutorial-flow:latest
+module load tacc-apptainer
+apptainer pull docker://$DOCKER_USER/2d_flow_matching:latest
